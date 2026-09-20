@@ -2,7 +2,7 @@
 
 ## 1. Project Overview
 
-Modern cloud-native applications are continuously developed and deployed using DevOps technologies such as GitHub, Jenkins, Docker, Kubernetes, and monitoring platforms. These environments generate large volumes of heterogeneous operational data, including application logs, deployment events, metrics, configuration changes, and version-control information.
+Modern cloud-native applications are continuously developed and deployed using DevOps technologies such as GitHub, Docker, Kubernetes, and monitoring platforms. These environments generate large volumes of heterogeneous operational data, including application logs, deployment events, metrics, configuration changes, and version-control information.
 
 When an incident occurs, DevOps engineers and Site Reliability Engineers (SREs) often need to manually examine information from multiple sources to identify the actual root cause. This process is time-consuming and can result in delayed incident resolution.
 
@@ -749,60 +749,110 @@ The research will determine whether the proposed Context-Aware Hybrid RAG approa
 The repository will gradually be organized as follows:
 
 ```text
-ai-devops-copilot/
-│
-├── README.md
-├── ABSTRACT.md
-├── LICENSE
-│
-├── research/
-│   ├── papers/
-│   ├── literature-review/
-│   ├── research-gap.md
-│   ├── research-question.md
-│   └── hypothesis.md
-│
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── incidents/
+context-aware-devops-rca/
 │
 ├── backend/
 │   ├── app/
-│   ├── api/
-│   ├── models/
-│   ├── services/
-│   └── main.py
+│   │   ├── main.py
+│   │   │
+│   │   ├── api/
+│   │   │   ├── auth.py
+│   │   │   ├── users.py
+│   │   │   ├── projects.py
+│   │   │   ├── integrations.py
+│   │   │   ├── incidents.py
+│   │   │   └── rca.py
+│   │   │
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   └── security.py
+│   │   │
+│   │   ├── models/
+│   │   │   ├── user.py
+│   │   │   ├── project.py
+│   │   │   ├── integration.py
+│   │   │   ├── event.py
+│   │   │   ├── incident.py
+│   │   │   └── evidence.py
+│   │   │
+│   │   ├── schemas/
+│   │   │   ├── user.py
+│   │   │   ├── project.py
+│   │   │   ├── integration.py
+│   │   │   ├── incident.py
+│   │   │   └── rca.py
+│   │   │
+│   │   ├── services/
+│   │   │   ├── project_service.py
+│   │   │   ├── incident_service.py
+│   │   │   ├── correlation_service.py
+│   │   │   └── evidence_service.py
+│   │   │
+│   │   ├── integrations/
+│   │   │   ├── github/
+│   │   │   │   └── client.py
+│   │   │   ├── kubernetes/
+│   │   │   │   └── client.py
+│   │   │   ├── prometheus/
+│   │   │   │   └── client.py
+│   │   │   └── opentelemetry/
+│   │   │       └── client.py
+│   │   │
+│   │   ├── rca_engine/
+│   │   │   ├── preprocessing.py
+│   │   │   ├── hybrid_retrieval.py
+│   │   │   ├── reranker.py
+│   │   │   ├── root_cause_ranker.py
+│   │   │   ├── explanation.py
+│   │   │   └── pipeline.py
+│   │   │
+│   │   └── utils/
+│   │       └── logger.py
+│   │
+│   └── requirements.txt
 │
 ├── frontend/
-│   └── ...
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── ProjectCard.jsx
+│   │   │   ├── IncidentCard.jsx
+│   │   │   └── EvidencePanel.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Projects.jsx
+│   │   │   ├── ProjectDetails.jsx
+│   │   │   ├── Incidents.jsx
+│   │   │   └── RCAResult.jsx
+│   │   │
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   │
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   │
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── public/
+│   ├── package.json
+│   └── index.html
 │
-├── ml/
-│   ├── anomaly_detection/
-│   ├── root_cause/
-│   └── evaluation/
-│
-├── rag/
-│   ├── ingestion/
-│   ├── retrieval/
-│   ├── reranking/
-│   └── generation/
-│
-├── devops/
-│   ├── docker/
-│   ├── kubernetes/
-│   ├── jenkins/
-│   └── prometheus/
-│
-├── experiments/
-│   ├── baselines/
-│   ├── ablation/
-│   └── results/
-│
-└── docs/
-    ├── architecture/
-    ├── methodology/
-    └── reports/
+└── database/
+    ├── schema.sql
+    ├── tables/
+    │   ├── users.sql
+    │   ├── projects.sql
+    │   ├── integrations.sql
+    │   ├── events.sql
+    │   ├── incidents.sql
+    │   └── evidence.sql
+    │
+    └── indexes/
+        └── pgvector_indexes.sql
 ```
 
 ---
