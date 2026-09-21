@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# RCAEval dataset
+data/rcaeval/
+data/rcaeval/**
+
+# Research datasets
+data/controlled/
+data/raw/
+
+# Model files
+models/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Experiment outputs
+experiments/results/
+experiments/runs/
+
+# Logs
+*.log
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
